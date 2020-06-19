@@ -56,11 +56,11 @@
 		45C2439F249D140E007CBBAD /* My Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				45C243A0249D140E007CBBAD /* AppDelegate.swift */,
-				45C243A2249D140E007CBBAD /* SceneDelegate.swift */,
-				45C243A4249D140E007CBBAD /* ContentView.swift */,
-				45C243A6249D140F007CBBAD /* Assets.xcassets */,
-				45C243AB249D140F007CBBAD /* LaunchScreen.storyboard */,
+				45C243B8249D1808007CBBAD /* Resources */,
+				45C243B7249D17DA007CBBAD /* System */,
+				45C243B6249D17CC007CBBAD /* View */,
+				45C243B5249D17C5007CBBAD /* ViewModel */,
+				45C243B4249D17BD007CBBAD /* Model */,
 				45C243AE249D140F007CBBAD /* Info.plist */,
 				45C243A8249D140F007CBBAD /* Preview Content */,
 			);
@@ -73,6 +73,46 @@
 				45C243A9249D140F007CBBAD /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		45C243B4249D17BD007CBBAD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		45C243B5249D17C5007CBBAD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		45C243B6249D17CC007CBBAD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				45C243AB249D140F007CBBAD /* LaunchScreen.storyboard */,
+				45C243A4249D140E007CBBAD /* ContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		45C243B7249D17DA007CBBAD /* System */ = {
+			isa = PBXGroup;
+			children = (
+				45C243A0249D140E007CBBAD /* AppDelegate.swift */,
+				45C243A2249D140E007CBBAD /* SceneDelegate.swift */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+		45C243B8249D1808007CBBAD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				45C243A6249D140F007CBBAD /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
