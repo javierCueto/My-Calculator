@@ -68,9 +68,6 @@ struct ContentView: View {
             VStack(spacing: 0){
                 
                 Spacer()
-                
-                
-                
                 HStack(alignment: .center ,spacing: 0){
                     
                     ForEach(self.buttons, id: \.self){ row in
@@ -84,17 +81,18 @@ struct ContentView: View {
                                 }){
                                     
                                     Text(button.title)
+                                        .font(.title)
                                         .frame(width: (geometry.size.width/5), height: self.buttonHeight(button: button, height: geometry.size.width)  )
+                                      
+                                        .background(LinearGradient(gradient: Gradient(colors: [Color("ColorButtons"),Color.white,Color.white,Color.white]), startPoint: .topLeading, endPoint: .bottomTrailing) )
+                                              
                                         
-                                        .background(Color.white)
-                                        .cornerRadius((geometry.size.width/5))
+                                        //.border(Color.purple, width: 5, cornerRadius: 20)
+                                       .cornerRadius((geometry.size.width/5))
+                                        .overlay(Capsule().stroke(Color("ColorShadown"), lineWidth: 0.4))
                                         .padding(.horizontal, (geometry.size.width/5) / 10)
                                         .padding(.vertical, (geometry.size.width/5) / 10)
-                                        .shadow(color: .gray, radius: 4, x: 0, y: 4)
-                                    
-                                    
-                                    
-                                    
+                                        .shadow(color: Color("ColorShadown"), radius: 7, x: 10, y: 10)
                                     
                                 }
                                 
