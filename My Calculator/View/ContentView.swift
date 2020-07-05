@@ -45,7 +45,7 @@ enum CalculatorButton: String{
         switch self{
         case .zero, .one, .two, .three, .four, .five, .six, .seven, .eight, .nine, .decimal:
             return Color("ColorDigits")
-        case .ac, .plusMinus, .percent:
+        case .ac, .plusMinus, .percent , .delete:
             return Color.blue
         case .equals:
             return Color.white
@@ -70,13 +70,13 @@ enum CalculatorButton: String{
     
     
     var shadownColor: Color{
-         switch self{
-         case .equals:
-             return Color("ColorShadownOrange")
-         default:
-             return Color("ColorShadown")
-         }
-     }
+        switch self{
+        case .equals:
+            return Color("ColorShadownOrange")
+        default:
+            return Color("ColorShadown")
+        }
+    }
     
     var isImage: Bool{
         switch self {
@@ -98,12 +98,57 @@ struct ContentView: View {
         [.delete, .divide , .multiply, .minus, .plus]
     ]
     
-   
+    @State private var digitsCalculation = "0"
+    
     var body: some View {
         
         GeometryReader { geometry in
             VStack(spacing: 0){
-                
+                GeometryReader { geometryCal in
+                    VStack(spacing: 0){
+                        
+                        
+                        VStack(){
+                            
+                            Spacer()
+                            HStack(){
+                                Spacer()
+                                Button(action : {
+                                    print("here")
+                                }){
+                                    Image(systemName: "gear")
+                                        .foregroundColor(Color("ColorDigits"))
+                                        .padding(.horizontal, (geometry.size.width/5) / 4)
+                                }
+                            }
+                            
+                            Spacer()
+                            Text("5")
+                                .foregroundColor(Color("ColorDigits"))
+                                .font(.system(size: 40))
+                                .frame(maxWidth:.infinity ,alignment: .bottomTrailing)
+                                .padding(.horizontal, (geometry.size.width/5) / 5)
+                            
+                        }.frame(maxWidth:.infinity ,maxHeight : (geometryCal.size.height/4) * 2)
+                         
+                        
+                        
+                        
+                        
+                        
+                        Spacer()
+                        
+                        Text(self.digitsCalculation)
+                            .foregroundColor(Color("ColorDigits"))
+                            .font(.system(size: 90))
+                            .frame(maxWidth:.infinity ,maxHeight : (geometryCal.size.height/4) * 2, alignment: .bottomTrailing)
+                            .padding(.horizontal, (geometry.size.width/5) / 5)
+                        
+                        
+                        
+                        
+                    }
+                }
                 Spacer()
                 HStack(alignment: .center ,spacing: 0){
                     
@@ -114,26 +159,11 @@ struct ContentView: View {
                             ForEach(row, id: \.self){ button in
                                 
                                 Button(action: {
-                                    print(button.title)
+                                    self.digitsCalculation = self.digitsCalculation + button.title
+                                    
                                 }){
                                     ContentView2(button: button, geometryWidth: geometry.size.width)
                                     
-                                    /*Image(systemName: "multiply")
-                         
-                                         Text(button.title)
-                                 
-                                   
-                                        .font(.title)
-                                        .foregroundColor(button.backgroundColor)
-                                        .frame(width: (geometry.size.width/5), height: self.buttonHeight(button: button, height: geometry.size.width)  )
-                                      
-                                        .background(LinearGradient(gradient: Gradient(colors: button.arrayColor ), startPoint: .topLeading, endPoint: .bottomTrailing) )
-                                       .cornerRadius((geometry.size.width/5))
-                                        .overlay(Capsule().stroke(Color("ColorShadown"), lineWidth: 0.4))
-                                        .padding(.horizontal, (geometry.size.width/5) / 10)
-                                        .padding(.vertical, (geometry.size.width/5) / 10)
-                                        .shadow(color: button.shadownColor, radius: 7, x: 10, y: 10)
-                                    */
                                 }
                                 
                             }
@@ -156,63 +186,49 @@ struct ContentView: View {
     }
     
     
-    func buttonHeight(button: CalculatorButton, height: CGFloat) -> CGFloat{
-//        if button == .plus{
-//
-//            return (((height/5 )) * 2) + ((height/5 ) / 5)
-//        }
-        return (height/5)
-    }
+    
 }
 
 struct ContentView2: View {
-  
+    
     let button: CalculatorButton
     let geometryWidth: CGFloat
-
+    
     @ViewBuilder
     var body: some View {
         if button.isImage {
             
             
             Image(systemName: button.title)
-                   .font(.title)
-                   .foregroundColor(button.backgroundColor)
-                   .frame(width: (geometryWidth/5), height: self.buttonHeight(button: button, height: geometryWidth)  )
-                 
-                   .background(LinearGradient(gradient: Gradient(colors: button.arrayColor ), startPoint: .topLeading, endPoint: .bottomTrailing) )
-                  .cornerRadius((geometryWidth/5))
-                   .overlay(Capsule().stroke(Color("ColorShadown"), lineWidth: 0.2))
-                   .padding(.horizontal, (geometryWidth/5) / 10)
-                   .padding(.vertical, (geometryWidth/5) / 10)
-                   .shadow(color: button.shadownColor, radius: 7, x: 6, y: 8)
+                .font(.title)
+                .foregroundColor(button.backgroundColor)
+                .frame(width: (geometryWidth/5), height: (geometryWidth/5)  )
+                
+                .background(LinearGradient(gradient: Gradient(colors: button.arrayColor ), startPoint: .topLeading, endPoint: .bottomTrailing) )
+                .cornerRadius((geometryWidth/5))
+                .overlay(Capsule().stroke(Color("ColorShadown"), lineWidth: 0.2))
+                .padding(.horizontal, (geometryWidth/5) / 10)
+                .padding(.bottom, (geometryWidth/5) / 10)
+                .shadow(color: button.shadownColor, radius: 7, x: 6, y: 8)
         }else{
             
             
-              Text(button.title)
-                   .font(.title)
-                   .foregroundColor(button.backgroundColor)
-                   .frame(width: (geometryWidth/5), height: self.buttonHeight(button: button, height: geometryWidth)  )
-                 
-                   .background(LinearGradient(gradient: Gradient(colors: button.arrayColor ), startPoint: .topLeading, endPoint: .bottomTrailing) )
-                  .cornerRadius((geometryWidth/5))
-                   .overlay(Capsule().stroke(Color("ColorShadown"), lineWidth: 0.2))
-                   .padding(.horizontal, (geometryWidth/5) / 10)
-                   .padding(.vertical, (geometryWidth/5) / 10)
-                   .shadow(color: button.shadownColor, radius: 7, x: 6, y: 8)
+            Text(button.title)
+                .font(.title)
+                .foregroundColor(button.backgroundColor)
+                .frame(width: (geometryWidth/5), height: (geometryWidth/5) )
+                
+                .background(LinearGradient(gradient: Gradient(colors: button.arrayColor ), startPoint: .topLeading, endPoint: .bottomTrailing) )
+                .cornerRadius((geometryWidth/5))
+                .overlay(Capsule().stroke(Color("ColorShadown"), lineWidth: 0.2))
+                .padding(.horizontal, (geometryWidth/5) / 10)
+                .padding(.bottom, (geometryWidth/5) / 10)
+                .shadow(color: button.shadownColor, radius: 7, x: 6, y: 8)
         }
         
     }
     
     
-      
-        func buttonHeight(button: CalculatorButton, height: CGFloat) -> CGFloat{
-    //        if button == .plus{
-    //
-    //            return (((height/5 )) * 2) + ((height/5 ) / 5)
-    //        }
-            return (height/5)
-        }
     
 }
 
